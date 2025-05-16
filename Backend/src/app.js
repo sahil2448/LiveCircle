@@ -18,7 +18,7 @@ app.get("/home", (req, res) => {
   return res.json({ Hello: "world" });
 });
 
-app.use("/api/v1/users",userRoutes);
+app.use("/api/v1/users", userRoutes);
 
 const start = async () => {
   const connectionDb = await mongoose.connect(
