@@ -32,7 +32,7 @@ ROOM MANAGEMENT:
 - Empty rooms are automatically cleaned up on disconnect
 */
 
-import { connection } from "mongoose";
+// import { connections } from "mongoose";
 import { Server } from "socket.io";
 
 let connections = {};

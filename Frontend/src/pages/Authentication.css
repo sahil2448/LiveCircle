@@ -1,0 +1,35 @@
+.mainContainer{
+    display: flex;
+    justify-content: space-between;;
+}
+.right{
+    padding: 2rem;
+    display: flex;
+    width: 40vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.icon{
+    border-radius: 40px;
+    background-color: purple;
+    color: white;
+    /* padding: 0.3rem; */
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.leftImg{
+    width: 60vw;
+    height: 100vh;
+    object-fit: cover;
+}

@@ -1,42 +1,94 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.landingPageContainer{
+  width: 100vw;
+  height: 100vh;
+  background:url("../public/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.landingPageContainer nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.landingPageContainer .navheader{
+  font-size: 2rem;
+  font-weight: bold;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.navlist{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  gap: 20px;
+  font-size: 1.2rem;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.nav-item{
+  cursor: pointer;
+}
+.login{
+  padding: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  cursor: pointer;
+  background-color:dodgerblue;
+  border-radius: 3px;
+  border-color: dodgerblue;
+  color: white;
+  font-size: 1rem;
+}
+.landingMainContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.content .p1{
+  font-size: 4rem;
+  font-weight: bold;
+}
+.content .p2{
+  font-size: 1.5rem;
+  word-spacing: 0.2em;
+  letter-spacing: 0.1rem;
+  color: rgb(167, 168, 169);
+}
+.connect{
+  color: dodgerblue;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.landingMainContainer > div:nth-child(2) img{
+  height: 70vh;
+}
+.landingMainContainer > div:nth-child(1) div[role="button"]{
+  padding: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  cursor: pointer;
+  background-color:dodgerblue;
+  border-radius: 6px;
+  border-color: dodgerblue;
+  color: white;
+  width: fit-content;
+  font-size: 1.5rem;
+  margin-top: 1.6rem;
+
+}
+.landingMainContainer > div:nth-child(1) div[role="button"] a{
+  text-decoration: none;
+  color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
