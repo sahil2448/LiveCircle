@@ -15,7 +15,7 @@ const App = () => {
             <Route path="/" element={<LandingPage />} />
             <Route path="/auth" element={<Authentication />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/Meet" element={<VideoMeet />} />
+            <Route path="/:url" element={<VideoMeet />} />
           </Routes>
         </AuthProvider>
       </Router>

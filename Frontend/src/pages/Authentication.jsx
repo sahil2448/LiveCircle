@@ -207,9 +207,8 @@ const Authentication = () => {
         setUsername("");
       }
     } catch (err) {
-      const message =
-        err.response?.data?.message || err.message || "Something went wrong";
-      console.log(err.message);
+      console.log(err);
+      let message = err.response.data.message;
       setError(message);
     }
   };

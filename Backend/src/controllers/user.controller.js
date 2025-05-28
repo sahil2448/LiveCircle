@@ -1,5 +1,6 @@
 import httpStatus from "http-status";
 import { User } from "../models/user.model.js";
+import { Meeting } from "../models/meeting.model.js";
 import bcrypt, { hash } from "bcrypt";
 import crypto from "crypto";
 // Login
@@ -79,6 +80,32 @@ const register = async (req, res) => {
 // WHAT ARE TOKENS
 // In login authentication, a token is a secure and concise way to verify a user's identity and grant them access to a system or application without repeatedly requiring them to enter credentials. This token acts like an "e-key" or a "stamped ticket" that allows the user to enter and navigate within the application as long as the token remains valid.
 
+let getUserHistory = async (req, res) => {
+  const { token } = req.query;
+  try {
+    const user = await User.findOne({ token: token });
+    const meetings = await Meeting.find({ user_id: user.username });
+    res.json(meetings);
+  } catch (e) {
+    res.json({ message: `Something went wrong: ${e}` });
+  }
+};
 
+let addToHistory = async (req, res) => {
+  const { token, meeting_code } = req.body;
 
-export { login, register };
+  try {
+    const user = await User.findOne({ token: token });
+    const newMeeting = new Meeting({
+      user_id: user.username,
+      meetingCode: meeting_code,
+    });
+
+    await newMeeting.save();
+    res.status(httpStatus.CREATED).json({ message: "Added code to history" });
+  } catch (e) {
+    res.json({ message: `Something went wong ${e}` });
+  }
+};
+
+export { login, register, addToHistory, getUserHistory };

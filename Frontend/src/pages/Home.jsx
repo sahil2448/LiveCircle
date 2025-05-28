@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import withAuth from "../utils/withAuth";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import { IconButton, Button, TextField } from "@mui/material";
 import RestoreIcon from "@mui/icons-material/Restore";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Home = () => {
   let [meetingCode, setMeetingCode] = useState("");
   let navigate = useNavigate();
-  let handleJoinVideoCall = () => {
+
+  const { addToUserHistory } = useContext(AuthContext);
+  let handleJoinVideoCall = async () => {
+    await addToUserHistory(meetingCode);
     navigate(`/${meetingCode}`);
   };
   return (

@@ -48,7 +48,7 @@ const VideoMeet = () => {
   // UI state variables
   let [showModal, setShowModel] = useState(false); // For showing/hiding modals
   let [messages, setMessages] = useState([]); // Chat messages
-  let [message, setMessage] = useState(); // Current message being typed
+  let [message, setMessage] = useState(""); // Current message being typed
   let [newMessage, setNewMessage] = useState(0); // Counter for new messages
   let [askForUserName, setAskForUsername] = useState(true); // Whether to show username prompt
   let [username, setUsername] = useState(""); // User's chosen username
