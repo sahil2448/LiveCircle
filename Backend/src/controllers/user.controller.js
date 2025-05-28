@@ -79,4 +79,6 @@ const register = async (req, res) => {
 // WHAT ARE TOKENS
 // In login authentication, a token is a secure and concise way to verify a user's identity and grant them access to a system or application without repeatedly requiring them to enter credentials. This token acts like an "e-key" or a "stamped ticket" that allows the user to enter and navigate within the application as long as the token remains valid.
 
+
+
 export { login, register };

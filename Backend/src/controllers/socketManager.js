@@ -165,11 +165,19 @@ effectively once the socket is found by not changing the result in later iterati
         for (let a = 0; a < persons.length; ++a) {
           if (persons[a] === socket.id) {
             key = room;
-            for (let a = 0; a < connections[key].length; ++a) {
-              io.to(connections[key][a]).emit("user-left", socket.id);
-              var index = connections[key].indexOf(socket.id);
-              connections[key].splice(index, 1);
-
+            // Defensive check
+            if (connections[key]) {
+              // Make a copy of the array to avoid mutation issues during iteration
+              const socketsInRoom = [...connections[key]];
+              for (let b = 0; b < socketsInRoom.length; ++b) {
+                io.to(socketsInRoom[b]).emit("user-left", socket.id);
+              }
+              // Remove the socket from the room
+              const index = connections[key].indexOf(socket.id);
+              if (index !== -1) {
+                connections[key].splice(index, 1);
+              }
+              // If the room is empty, delete it
               if (connections[key].length === 0) {
                 delete connections[key];
               }

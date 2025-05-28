@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
+
 const server_url = "http://localhost:8000"; // Backend server URL for signaling
 import { Badge, Button, IconButton } from "@mui/material";
 import { io } from "socket.io-client";
@@ -12,6 +14,18 @@ import MicOff from "@mui/icons-material/MicOff";
 import ScreenShare from "@mui/icons-material/ScreenShare";
 import StopScreenShare from "@mui/icons-material/StopScreenShare";
 import Chat from "@mui/icons-material/Chat";
+import Tooltip from "@mui/material/Tooltip";
+import Zoom from "@mui/material/Zoom";
+import Box from "@mui/material/Box";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
 let connections = {}; // Object to store all peer connections
 const peerConfigConnections = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }], // STUN server configuration for NAT traversal
@@ -32,7 +46,7 @@ const VideoMeet = () => {
   let [screenAvailable, setScreenAvailable] = useState(); // Whether screen sharing is available
 
   // UI state variables
-  let [showModal, setShowModel] = useState(); // For showing/hiding modals
+  let [showModal, setShowModel] = useState(false); // For showing/hiding modals
   let [messages, setMessages] = useState([]); // Chat messages
   let [message, setMessage] = useState(); // Current message being typed
   let [newMessage, setNewMessage] = useState(0); // Counter for new messages
@@ -260,7 +274,6 @@ const VideoMeet = () => {
       }
     }
   };
-  let addMessage = () => {};
 
   // NICHE KA COMMENTED CODE MERA HAI...connectToSocketServer wala code mera hai
 
@@ -480,6 +493,38 @@ const VideoMeet = () => {
     }
   });
 
+  const handleChat = () => {
+    setShowModel(!showModal);
+  };
+
+  let sendMessage = () => {
+    socketRef.current.emit("chat-message", message, username);
+    setMessage("");
+  };
+
+  let addMessage = (data, sender, socketIdSender) => {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { sender: sender, data: data },
+    ]);
+    if (socketIdSender !== socketIdRef.current) {
+      setNewMessage((prevMessages) => prevMessages + 1);
+    }
+  };
+
+  let routeTo = useNavigate();
+
+  let handleEndCall = () => {
+    try {
+      let tracks = localVideoRef.current.srcObject.getTracks();
+      tracks.forEach((track) => track.stop());
+    } catch (e) {
+      console.log(e);
+    }
+
+    routeTo("/home");
+  };
+
   return (
     <div>
       {/* Conditional rendering based on username state - incomplete */}
@@ -506,37 +551,123 @@ const VideoMeet = () => {
         </div>
       ) : (
         <div className={styles.meetVideoContainer}>
+          {showModal ? (
+            <div className={styles.chatRoom}>
+              <div className={styles.chatContainer}>
+                <h1>Chat</h1>
+                <div
+                  className={styles.chattingDisplay}
+                  style={{ overflowY: "scroll" }}
+                >
+                  {messages.map((item, idx) => {
+                    return (
+                      <div key={idx}>
+                        <p style={{ fontWeight: "bold", marginBottom: "2px" }}>
+                          {item.sender}
+                        </p>
+                        <p
+                          style={{
+                            padding: "1rem",
+                            backgroundColor: "#74d1fc",
+                            width: "50%",
+                            maxWidth: "100%",
+                            borderRadius: "10px",
+                            marginBottom: "15px",
+                          }}
+                        >
+                          {item.data}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={styles.chattingArea}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Enter your chat"
+                    variant="outlined"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                  <Button variant="contained" onClick={sendMessage}>
+                    Send
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <div className={styles.buttonsContainer}>
-            <IconButton style={{ color: "white" }} onClick={handleVideo}>
-              {video === true ? <VideocamIcon /> : <VideocamOffIcon />}
-            </IconButton>
-            <IconButton style={{ color: "red" }}>
-              <CallEnd />
-            </IconButton>
-            <IconButton style={{ color: "white" }} onClick={handleAudio}>
-              {audio === true ? <Mic /> : <MicOff />}
-            </IconButton>
-            {screenAvailable === true ? (
-              <IconButton
-                style={{ color: "white" }}
-                onClick={handleScreenShare}
-              >
-                {screen === true ? <ScreenShare /> : <StopScreenShare />}
+            <Tooltip
+              title="Video"
+              slots={{
+                transition: Zoom,
+              }}
+            >
+              <IconButton style={{ color: "white" }} onClick={handleVideo}>
+                {video === true ? <VideocamIcon /> : <VideocamOffIcon />}
               </IconButton>
+            </Tooltip>
+
+            <Tooltip
+              title="End Call"
+              slots={{
+                transition: Zoom,
+              }}
+            >
+              <IconButton style={{ color: "red" }} onClick={handleEndCall}>
+                <CallEnd />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip
+              title={`${audio ? "Turn Off" : "Turn On"}`}
+              slots={{
+                transition: Zoom,
+              }}
+            >
+              <IconButton style={{ color: "white" }} onClick={handleAudio}>
+                {audio === true ? <Mic /> : <MicOff />}
+              </IconButton>
+            </Tooltip>
+
+            {screenAvailable === true ? (
+              <Tooltip
+                title={`${screen ? "Share Screen" : "Original"}`}
+                slots={{
+                  transition: Zoom,
+                }}
+              >
+                <IconButton
+                  style={{ color: "white" }}
+                  onClick={handleScreenShare}
+                >
+                  {screen === true ? <ScreenShare /> : <StopScreenShare />}
+                </IconButton>
+              </Tooltip>
             ) : (
               <></>
             )}
             <Badge badgeContent={newMessage} max={999} color="secondary">
-              <IconButton style={{ color: "white" }}>
-                <Chat />
-              </IconButton>
+              <Tooltip
+                title="Open Chat"
+                slots={{
+                  transition: Zoom,
+                }}
+              >
+                <IconButton onClick={handleChat} style={{ color: "white" }}>
+                  <Chat />
+                </IconButton>
+              </Tooltip>
             </Badge>
           </div>
           <video
             className={styles.meetUserVideo}
             ref={localVideoRef}
             autoPlay
-            muted
+            muted={audio}
           ></video>
           <div className={styles.conferenceView}>
             {videos.map((video) => (

@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import Authentication from "./pages/Authentication";
+import Home from "./pages/Home";
 import { AuthProvider } from "./contexts/AuthContext";
 import VideoMeet from "./pages/VideoMeet";
 const App = () => {
@@ -13,7 +14,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/auth" element={<Authentication />} />
-            <Route path="/:url" element={<VideoMeet />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/Meet" element={<VideoMeet />} />
           </Routes>
         </AuthProvider>
       </Router>

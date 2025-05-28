@@ -11,10 +11,18 @@ function LandingPage() {
         </div>
         <div className="navlist">
           <a className="nav-item">Join as Guest</a>
-          <Link to={"/auth"} className="nav-item">
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to={"/auth"}
+            className="nav-item"
+          >
             Register
           </Link>
-          <Link to={"/auth"} className="login">
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to={"/auth"}
+            className="login"
+          >
             Login
           </Link>
         </div>

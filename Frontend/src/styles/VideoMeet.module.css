@@ -8,7 +8,7 @@
 .meetUserVideo{
     position: absolute;
     bottom: 10vh;
-    right: 5vh;
+    left: 5vh;
     height: 25vh;
     width: auto;
     border-radius: 20px;
@@ -34,4 +34,23 @@
 }
 .buttonsContainer svg{
     font-size: 2.5rem; 
+}
+.chatRoom{
+    position: absolute;
+    height: 90vh;
+    width: 30vw;
+    bottom: 10vh;
+    right: 0;
+    background-color: white;
+    border-radius: 10px;
+    padding-inline: 20px;
+}
+
+.chatContainer{
+    position: relative;
+    height: 100%;
+}
+.chattingArea{
+    position: absolute;
+    bottom: 0;
 }
