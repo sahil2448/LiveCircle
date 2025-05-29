@@ -529,25 +529,65 @@ const VideoMeet = () => {
     <div>
       {/* Conditional rendering based on username state - incomplete */}
       {askForUserName === true ? (
-        <div>
-          <h2>Enter into Lobby</h2>
-          {/* Username input field */}
-          <TextField
-            id="outlined-basic"
-            label="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            variant="outlined"
-          />
-          {/* Connect button to join the meeting */}
-          <Button variant="contained" onClick={connect}>
-            Connect
-          </Button>
-
+        <div className="lobbyContainer">
           <div>
             {/* Local video display */}
-            <video ref={localVideoRef} autoPlay muted></video>
+            <video ref={localVideoRef} className="lobbyVideo" autoPlay></video>
           </div>
+          <h2>Enter into Lobby</h2>
+          <div>
+            <Tooltip
+              title="Video"
+              slots={{
+                transition: Zoom,
+              }}
+            >
+              <IconButton style={{ color: "black" }} onClick={handleVideo}>
+                {video === true ? <VideocamIcon /> : <VideocamOffIcon />}
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip
+              title="End Call"
+              slots={{
+                transition: Zoom,
+              }}
+            >
+              <IconButton style={{ color: "red" }} onClick={handleEndCall}>
+                <CallEnd />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip
+              title={`${audio ? "Turn Off" : "Turn On"}`}
+              slots={{
+                transition: Zoom,
+              }}
+            >
+              <IconButton style={{ color: "black" }} onClick={handleAudio}>
+                {audio === true ? <Mic /> : <MicOff />}
+              </IconButton>
+            </Tooltip>
+          </div>
+          <div className="textF">
+            {" "}
+            <TextField
+              id="outlined-basic"
+              label="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              variant="outlined"
+            />
+            {/* Connect button to join the meeting */}
+            <Button
+              variant="contained"
+              style={{ height: "2.5rem" }}
+              onClick={connect}
+            >
+              Connect
+            </Button>
+          </div>
+          {/* Username input field */}
         </div>
       ) : (
         <div className={styles.meetVideoContainer}>
@@ -598,7 +638,6 @@ const VideoMeet = () => {
           ) : (
             <></>
           )}
-
           <div className={styles.buttonsContainer}>
             <Tooltip
               title="Video"
@@ -663,12 +702,29 @@ const VideoMeet = () => {
               </Tooltip>
             </Badge>
           </div>
-          <video
-            className={styles.meetUserVideo}
-            ref={localVideoRef}
-            autoPlay
-            muted={audio}
-          ></video>
+          <div style={{ display: "flex" }}>
+            {" "}
+            <video
+              className={styles.meetUserVideo}
+              ref={localVideoRef}
+              autoPlay
+              muted={audio === true ? false : true}
+            />
+            <p
+              className="adminName"
+              style={{
+                color: "white",
+                position: "absolute",
+                bottom: "1.5rem",
+                left: "2.6rem",
+                fontSize: "1.4rem",
+              }}
+            >
+              {" "}
+              {}
+            </p>
+          </div>
+
           <div className={styles.conferenceView}>
             {videos.map((video) => (
               <div key={video.socketId}>

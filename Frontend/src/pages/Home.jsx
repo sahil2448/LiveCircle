@@ -19,24 +19,26 @@ const Home = () => {
     <>
       <div className="navBar">
         <div style={{ display: "flex", alignItems: "center" }}>
-          <h2>Apna Video Call</h2>
+          <h2>LiveCircle</h2>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "13px" }}>
           <IconButton
             onClick={() => {
               navigate("/history");
             }}
+            style={{ borderRadius: "1px", display: "flex", gap: "4px" }}
           >
             <RestoreIcon />
+            <p style={{ fontSize: "1.2rem" }}>History</p>
           </IconButton>
-          <p>History</p>
 
           <Button
             onClick={() => {
               localStorage.removeItem("token");
               navigate("/auth");
             }}
+            variant="contained"
           >
             Logout
           </Button>
@@ -45,17 +47,26 @@ const Home = () => {
 
       <div className="meetContainer">
         <div className="leftPanel">
-          <div>
-            <h2>Providing Quality Video Call Just Like Quality Education</h2>
+          <div className="innerLeft">
+            <p>
+              Providing <span> Quality Video Call</span> Just Like <br />
+              Quality Education
+            </p>
 
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div
+              style={{ display: "flex", gap: "10px", alignItems: "flex-end" }}
+            >
               <TextField
                 onChange={(e) => setMeetingCode(e.target.value)}
                 id="outlined-basic"
                 label="Meeting Code"
                 variant="outlined"
               />
-              <Button onClick={handleJoinVideoCall} variant="contained">
+              <Button
+                onClick={handleJoinVideoCall}
+                variant="contained"
+                style={{ height: "2.5rem" }}
+              >
                 Join
               </Button>
             </div>

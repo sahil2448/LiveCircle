@@ -58,6 +58,16 @@ export const AuthProvider = ({ children }) => {
     // }
   };
 
+  const deleteFromHistory = async (meetingCode) => {
+    let request = await client.delete("/delete_from_history", {
+      data: {
+        token: localStorage.getItem("token"),
+        meeting_code: meetingCode,
+      },
+    });
+    return request;
+  };
+
   const addToUserHistory = async (meetingCode) => {
     // try {
     let request = await client.post("/add_to_activity", {
@@ -77,6 +87,7 @@ export const AuthProvider = ({ children }) => {
     handleLogin,
     getHistoryOfUser,
     addToUserHistory,
+    deleteFromHistory,
   };
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;

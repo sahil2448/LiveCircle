@@ -13,6 +13,12 @@
     width: auto;
     border-radius: 20px;
 }
+/* .adminName{
+    position: absolute;
+    bottom: 10vh;
+    left: 5vh;
+    height: 25vh;
+} */
 .conferenceView{
     display: flex;
     padding: 20px;

@@ -112,6 +112,7 @@
 .leftPanel {
   height: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -125,3 +126,39 @@
   height: auto;
   border-radius: 20px;
 }
+.innerLeft{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.innerLeft p{
+  font-size: xx-large;
+  font-weight: 500;
+}
+.innerLeft span{
+  color: rgb(5, 92, 178);
+}
+.lobbyVideo{
+  width: 30rem;
+  height:auto;
+  margin-top: 2rem;
+  border-radius: 1.5rem;
+}
+
+.lobbyContainer{
+  display: flex; 
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.textF{
+  display: flex;
+
+  gap: 1rem;
+  align-items: center;
+}
+
+
+
+

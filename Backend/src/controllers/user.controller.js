@@ -108,4 +108,20 @@ let addToHistory = async (req, res) => {
   }
 };
 
-export { login, register, addToHistory, getUserHistory };
+let deleteFromHistory = async (req, res) => {
+  const { token, meeting_code } = req.body;
+
+  try {
+    const user = await User.findOne({ token: token });
+
+    const deletedMeeting = await Meeting.deleteOne({
+      user_id: user.username,
+      meetingCode: meeting_code,
+    });
+    console.log(deletedMeeting);
+    res.status(httpStatus.OK).json({ message: "Deleted to history" });
+  } catch (e) {
+    res.json({ message: `Something went wong ${e}` });
+  }
+};
+export { login, register, addToHistory, getUserHistory, deleteFromHistory };

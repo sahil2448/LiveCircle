@@ -1,8 +1,9 @@
 import React from "react";
 import "../App.css";
 import mobile from "../../public/mobile.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function LandingPage() {
+  const routeTo = useNavigate();
   return (
     <div className="landingPageContainer">
       <nav>
@@ -10,7 +11,9 @@ function LandingPage() {
           <a>LiveCirle</a>
         </div>
         <div className="navlist">
-          <a className="nav-item">Join as Guest</a>
+          <a className="nav-item" onClick={() => routeTo("/Guest123")}>
+            Join as Guest
+          </a>
           <Link
             style={{ color: "white", textDecoration: "none" }}
             to={"/auth"}
