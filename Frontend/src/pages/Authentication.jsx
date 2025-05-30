@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import nature1 from "../../public/nature1.avif";
 import "./Authentication.css";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -42,12 +42,26 @@ const Authentication = () => {
     }
   };
 
+  const threshold = 750;
+  const [myWidth, setMyWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setMyWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="mainContainer">
-      <div className="left">
-        <img className="leftImg" src={nature1} alt="" />
-      </div>
-      <div className="right">
+      {myWidth > threshold && (
+        <div className="left">
+          <img className="leftImg" src={nature1} alt="" />
+        </div>
+      )}
+      <div
+        className="right"
+        style={{ width: myWidth > threshold ? undefined : "100vw" }}
+      >
         <div className="icon">
           {" "}
           <LockOutlinedIcon />

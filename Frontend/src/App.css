@@ -1,11 +1,24 @@
-.landingPageContainer{
-  width: 100vw;
-  height: 100vh;
-  background:url("../public/background.png");
-  background-repeat: no-repeat;
+.landingPageContainer {
+  background: url("../public/background.png") no-repeat center center;
   background-size: cover;
   color: white;
+  width: 100vw;
+  min-height: 100vh;
 }
+
+@media (max-width: 600px) {
+  .landingPageContainer {
+    background-size: cover;
+      width: 100vw;
+      min-height: 100vh;
+    background-position: center center;
+    /* background: repeat-y; */
+    /* background-color: #0a0a23; */
+    /* Optionally switch to a mobile-optimized image */
+    /* background-image: url("../public/background-mobile.png"); */
+  }
+}
+
 .landingPageContainer nav{
   display: flex;
   flex-direction: row;
@@ -22,12 +35,14 @@
 .navlist{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   color: white;
   gap: 20px;
   font-size: 1.2rem;
 }
+
 .nav-item{
   cursor: pointer;
 }
@@ -66,6 +81,46 @@
   letter-spacing: 0.1rem;
   color: rgb(167, 168, 169);
 }
+
+
+@media (max-width: 710px) {
+  .content .p1{
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  .content .p3{
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .brdrs{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+}
+
+@media (max-width: 600px) {
+  .content .p1{
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+  .content .p2{
+    font-size: 1.2rem;
+  }
+
+}
+/* @media (max-width: 440px) { */
+@media (max-width: 440px) {
+  .brdrs img {
+    width: 80vw;
+  }
+    .content .p2{
+    font-weight: 0.5rem;
+  }
+}
+/* } */
+
+
 .connect{
   color: dodgerblue;
 }
@@ -85,7 +140,16 @@
   width: fit-content;
   font-size: 1.5rem;
   margin-top: 1.6rem;
+}
 
+@media (max-width: 440px) {
+  .landingMainContainer > div:nth-child(1) div[role="button"]{
+      font-size: 1.1rem;
+        padding: 10px;
+  }
+  .content{
+    width: 80vw;
+  }
 }
 .landingMainContainer > div:nth-child(1) div[role="button"] a{
   text-decoration: none;
