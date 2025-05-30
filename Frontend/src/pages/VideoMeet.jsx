@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import server from "../environment";
 
-const server_url = server; // Backend server URL for signaling
 import { Badge, Button, IconButton } from "@mui/material";
 import { io } from "socket.io-client";
 import styles from "../styles/VideoMeet.module.css";
@@ -17,11 +16,12 @@ import StopScreenShare from "@mui/icons-material/StopScreenShare";
 import Chat from "@mui/icons-material/Chat";
 import Tooltip from "@mui/material/Tooltip";
 import Zoom from "@mui/material/Zoom";
-import server from "../environment";
 let connections = {}; // Object to store all peer connections
 const peerConfigConnections = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }], // STUN server configuration for NAT traversal
 };
+
+const server_url = server; // Backend server URL for signaling
 
 const VideoMeet = () => {
   // Refs for socket and DOM elements
