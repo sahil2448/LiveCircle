@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
+import server from "../environment";
 
-const server_url = "http://localhost:8000"; // Backend server URL for signaling
+const server_url = server; // Backend server URL for signaling
 import { Badge, Button, IconButton } from "@mui/material";
 import { io } from "socket.io-client";
 import styles from "../styles/VideoMeet.module.css";
@@ -16,16 +17,7 @@ import StopScreenShare from "@mui/icons-material/StopScreenShare";
 import Chat from "@mui/icons-material/Chat";
 import Tooltip from "@mui/material/Tooltip";
 import Zoom from "@mui/material/Zoom";
-import Box from "@mui/material/Box";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import server from "../environment";
 let connections = {}; // Object to store all peer connections
 const peerConfigConnections = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }], // STUN server configuration for NAT traversal
@@ -414,9 +406,12 @@ const VideoMeet = () => {
    * room interface. It also calls the getMedia function, which requests
    * camera and microphone permissions and sets up the local stream.
    */
-  let connect = () => {
+
+  const names = [];
+  let connect = (username) => {
     setAskForUsername(false);
     getMedia();
+    names.push(username);
   };
 
   const handleVideo = () => {
@@ -726,7 +721,7 @@ const VideoMeet = () => {
           </div>
 
           <div className={styles.conferenceView}>
-            {videos.map((video) => (
+            {videos.map((video, idx) => (
               <div key={video.socketId}>
                 <video
                   data-socket={video.socketId}
@@ -737,7 +732,8 @@ const VideoMeet = () => {
                   }}
                   autoPlay
                   muted
-                ></video>
+                />
+                <p>{names[idx]}</p>
               </div>
             ))}
           </div>
