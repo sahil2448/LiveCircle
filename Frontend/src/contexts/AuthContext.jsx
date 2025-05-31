@@ -60,9 +60,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   const deleteFromHistory = async (meetingCode) => {
+    let token = localStorage.getItem("token");
     let request = await client.delete("/delete_from_history", {
-      data: {
-        token: localStorage.getItem("token"),
+      params: {
+        token,
         meeting_code: meetingCode,
       },
     });
