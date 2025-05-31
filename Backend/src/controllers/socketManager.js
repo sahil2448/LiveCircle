@@ -42,7 +42,7 @@ export const connectToSocket = (server) => {
   const io = new Server(server, {
     cors: {
       origin: "*",
-      methods: ["GET", "POST"],
+      methods: ["GET", "POST", "DELETE"],
       allowedHeaders: ["*"],
       credentials: true,
     },
