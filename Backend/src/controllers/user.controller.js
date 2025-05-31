@@ -109,7 +109,7 @@ let addToHistory = async (req, res) => {
 };
 
 let deleteFromHistory = async (req, res) => {
-  const { token, meeting_code } = req.body;
+  const { token, meeting_code } = req.query;
 
   try {
     const user = await User.findOne({ token: token });
