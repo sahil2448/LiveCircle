@@ -16,6 +16,8 @@ import StopScreenShare from "@mui/icons-material/StopScreenShare";
 import Chat from "@mui/icons-material/Chat";
 import Tooltip from "@mui/material/Tooltip";
 import Zoom from "@mui/material/Zoom";
+import CloseIcon from "@mui/icons-material/Close";
+import SendIcon from "@mui/icons-material/Send";
 let connections = {}; // Object to store all peer connections
 const peerConfigConnections = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }], // STUN server configuration for NAT traversal
@@ -227,7 +229,7 @@ const VideoMeet = () => {
     }
   }, [audio, video]);
 
-  // TODO
+  // Manages the WebRTC handshake process through promise chains
   let gotMessageFromServer = (FromId, message) => {
     // CHECK THE SIGNMA/DELTA-LIBRARY/BUILDING-ZOOM/MUST-TO-READ ... FOR better understanding of this function
     let signal = JSON.parse(message);
@@ -235,7 +237,7 @@ const VideoMeet = () => {
     if (FromId !== socketIdRef.current) {
       if (signal.sdp) {
         connections[FromId].setRemoteDescription(
-          new RTCSessionDescription(signal.sdp)
+          new RTCSessionDescription(signal.sdp) // here is what other person can send to me
         )
           .then(() => {
             if (signal.sdp.type === "offer") {
@@ -491,6 +493,9 @@ const VideoMeet = () => {
   const handleChat = () => {
     setShowModel(!showModal);
   };
+  const handleCross = () => {
+    setShowModel(false);
+  };
 
   let sendMessage = () => {
     socketRef.current.emit("chat-message", message, username);
@@ -588,24 +593,45 @@ const VideoMeet = () => {
         <div className={styles.meetVideoContainer}>
           {showModal ? (
             <div className={styles.chatRoom}>
-              <div className={styles.chatContainer}>
-                <h1>Chat</h1>
+              <div
+                className={styles.chatContainer}
+                style={{ overflowY: "scroll" }}
+              >
+                <div className={styles.head}>
+                  {" "}
+                  <h1>Chat</h1>
+                  <Tooltip
+                    title="Close Chat"
+                    slots={{
+                      transition: Zoom,
+                    }}
+                  >
+                    {" "}
+                    <IconButton
+                      style={{ color: "black", border: "2px solid black" }}
+                      onClick={handleCross}
+                    >
+                      {<CloseIcon />}
+                    </IconButton>{" "}
+                  </Tooltip>
+                </div>
+
                 <div
                   className={styles.chattingDisplay}
                   style={{ overflowY: "scroll" }}
                 >
                   {messages.map((item, idx) => {
-                    return (
+                    return item.data ? (
                       <div key={idx}>
                         <p style={{ fontWeight: "bold", marginBottom: "2px" }}>
                           {item.sender}
                         </p>
                         <p
+                          className={styles.chat}
                           style={{
                             padding: "1rem",
-                            backgroundColor: "#74d1fc",
-                            width: "50%",
-                            maxWidth: "100%",
+                            backgroundColor: "#99ddff",
+
                             borderRadius: "10px",
                             marginBottom: "15px",
                           }}
@@ -613,20 +639,34 @@ const VideoMeet = () => {
                           {item.data}
                         </p>
                       </div>
+                    ) : (
+                      <></>
                     );
                   })}
                 </div>
                 <div className={styles.chattingArea}>
                   <TextField
+                    className={styles.txt}
                     id="outlined-basic"
                     label="Enter your chat"
                     variant="outlined"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                   />
-                  <Button variant="contained" onClick={sendMessage}>
-                    Send
-                  </Button>
+                  <Tooltip
+                  // title="Send"
+                  // slots={{
+                  //   transition: Zoom,
+                  // }}
+                  >
+                    <IconButton
+                      onClick={sendMessage}
+                      className={styles.send}
+                      style={{ color: "black", border: "2px solid black" }}
+                    >
+                      {<SendIcon />}
+                    </IconButton>{" "}
+                  </Tooltip>
                 </div>
               </div>
             </div>

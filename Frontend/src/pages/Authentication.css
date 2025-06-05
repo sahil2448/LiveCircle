@@ -33,3 +33,17 @@
     height: 100vh;
     object-fit: cover;
 }
+.header{
+    position: absolute;
+    color: white;
+    font-weight:bold;
+    top: 1rem;
+    left: 1rem;
+    cursor: pointer;
+    font-size: 2rem;
+}
+@media (max-width:752px) {
+    .header{
+        color: black;
+    }
+}

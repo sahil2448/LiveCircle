@@ -64,7 +64,7 @@ function LandingPage() {
   return (
     <div className="landingPageContainer">
       <nav>
-        <div className="navheader">
+        <div className="navheader" onClick={() => routeTo("/")}>
           <a>LiveCirle</a>
         </div>
         {myWidth > threshold ? (

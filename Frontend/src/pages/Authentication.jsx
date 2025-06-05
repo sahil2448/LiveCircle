@@ -5,6 +5,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Button, Snackbar, TextField } from "@mui/material";
 import { AuthContext } from "../contexts/AuthContext";
 import { Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Authentication = () => {
   const [formState, setFormState] = useState(0);
@@ -51,8 +52,12 @@ const Authentication = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const routeTo = useNavigate();
   return (
     <div className="mainContainer">
+      <div style={{}} className="header" onClick={() => routeTo("/")}>
+        <a>LiveCirle</a>
+      </div>
       {myWidth > threshold && (
         <div className="left">
           <img className="leftImg" src={nature1} alt="" />

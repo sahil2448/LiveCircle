@@ -48,6 +48,7 @@ export const connectToSocket = (server) => {
     },
   });
 
+  // Anologous to event listner system
   io.on("connection", (socket) => {
     console.log("SOMETHING CONNECTED");
     socket.on("join-call", (path) => {

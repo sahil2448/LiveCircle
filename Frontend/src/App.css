@@ -32,6 +32,9 @@
   font-size: 2rem;
   font-weight: bold;
 }
+.landingPageContainer .navheader :hover{
+  cursor: pointer;
+}
 .navlist{
   display: flex;
   flex-direction: row;

@@ -13,12 +13,7 @@
     width: auto;
     border-radius: 20px;
 }
-/* .adminName{
-    position: absolute;
-    bottom: 10vh;
-    left: 5vh;
-    height: 25vh;
-} */
+
 .conferenceView{
     display: flex;
     padding: 20px;
@@ -58,5 +53,52 @@
 }
 .chattingArea{
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
+    display: flex; 
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    z-index: 10000;
+}
+.chattingArea .txt{
+    width: 30vw;
+}
+
+.head{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+}
+.chattingDisplay{
+    height: 70vh;
+}
+.chat{
+    width: 70%;
+     max-width:100%,
+}
+
+@media (max-width:1000px) {
+    .chatRoom{
+        width: 50vw;
+    }
+    .chattingArea .txt{
+        width: 50vw;
+    }
+
+}
+@media (max-width:600px) {
+    .chatRoom{
+        width: 80vw;
+    }
+    .chattingArea .txt{
+        width: 63vw;
+    }
+    .send{
+        height: 3rem;
+    }
+    .chat{
+            width: 80%;
+
+    }
 }
