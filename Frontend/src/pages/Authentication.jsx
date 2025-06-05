@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import nature1 from "../../public/nature1.avif";
+import nature1 from "../../public/nature1.webp";
 import "./Authentication.css";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Button, Snackbar, TextField } from "@mui/material";

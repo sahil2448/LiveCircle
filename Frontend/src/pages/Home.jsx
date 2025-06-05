@@ -18,8 +18,12 @@ const Home = () => {
   return (
     <>
       <div className="navBar">
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <h2>LiveCircle</h2>
+        <div
+          className="navHeader"
+          style={{ display: "flex", alignItems: "center" }}
+          onClick={() => navigate("/")}
+        >
+          <h1 style={{ fontSize: "2rem", cursor: "pointer" }}>LiveCircle</h1>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "13px" }}>
@@ -73,7 +77,7 @@ const Home = () => {
           </div>
         </div>
         <div className="rightPanel">
-          <img srcSet="/logo3.png" alt="" />
+          <img srcSet="/logo3.webp" alt="" />
         </div>
       </div>
     </>
