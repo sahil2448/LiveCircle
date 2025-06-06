@@ -13,6 +13,7 @@ const Authentication = () => {
   const [password, setPassword] = useState();
   const [name, setName] = useState();
   const [error, setError] = useState();
+  const [showError, setShowError] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState();
 
@@ -40,6 +41,7 @@ const Authentication = () => {
       console.log(err);
       let message = err.response.data.message;
       setError(message);
+      setShowError(true);
     }
   };
 
@@ -53,14 +55,17 @@ const Authentication = () => {
   }, []);
 
   const routeTo = useNavigate();
+
   return (
     <div className="mainContainer">
-      <div style={{}} className="header" onClick={() => routeTo("/")}>
-        <a>LiveCirle</a>
-      </div>
       {myWidth > threshold && (
-        <div className="left">
-          <img className="leftImg" src={nature1} alt="" />
+        <div>
+          <div style={{}} className="header" onClick={() => routeTo("/")}>
+            <a>LiveCirle</a>
+          </div>
+          <div className="left">
+            <img className="leftImg" src={nature1} alt="" />
+          </div>
         </div>
       )}
       <div
@@ -125,7 +130,7 @@ const Authentication = () => {
           onChange={(e) => setPassword(e.target.value)}
           id="password"
         />
-        <p style={{ color: "red", textAlign: "start" }}>{error}</p>
+        {/* <p style={{ color: "red", textAlign: "start" }}>{error}</p> */}
 
         <Button
           variant="contained"
@@ -144,10 +149,25 @@ const Authentication = () => {
         <Alert
           onClose={() => setOpen(false)}
           severity="success"
-          variant="filled"
+          variant="outlined"
           sx={{ width: "100%" }}
         >
           {message}
+        </Alert>
+      </Snackbar>{" "}
+      <Snackbar
+        open={showError}
+        autoHideDuration={2000}
+        onClose={() => setShowError(false)}
+        color="red"
+      >
+        <Alert
+          onClose={() => setShowError(false)}
+          severity="error"
+          variant="outlined"
+          sx={{ width: "100%" }}
+        >
+          {error}
         </Alert>
       </Snackbar>{" "}
     </div>

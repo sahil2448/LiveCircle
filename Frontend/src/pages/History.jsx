@@ -71,7 +71,12 @@ const History = () => {
         }}
       >
         {" "}
-        <h3 style={{ fontSize: "2rem" }}>History</h3>
+        <h3
+          onClick={() => routeTo("/history")}
+          style={{ fontSize: "2rem", cursor: "pointer" }}
+        >
+          History
+        </h3>
         <IconButton
           onClick={() => {
             routeTo("/home");
@@ -99,6 +104,7 @@ const History = () => {
               <Card variant="outlined">
                 <CardContent>
                   <div
+                    className="content"
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <div>
@@ -151,18 +157,22 @@ const History = () => {
             }}
           >
             <img
+              className="emptyImg"
               src={EmtpyState}
               style={{
-                height: "30rem",
-                width: "30rem",
-                objectFit: "cover",
+                height: "60vh",
+                width: "100vw",
+                objectFit: "contain",
                 display: "flex",
                 alignSelf: "center",
                 justifySelf: "center",
               }}
               alt=""
             />
-            <h1> OOPS...No past Meetings exists !</h1>
+            <h1 className="emptyText" style={{ textAlign: "center" }}>
+              {" "}
+              OOPS...No past Meetings exists !
+            </h1>
           </div>
         ) : (
           <></>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import withAuth from "../utils/withAuth";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
@@ -15,15 +15,27 @@ const Home = () => {
     await addToUserHistory(meetingCode);
     navigate(`/${meetingCode}`);
   };
+
+  const threshold = 750;
+  const [myWidth, setMyWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setMyWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <div className="navBar">
         <div
           className="navHeader"
           style={{ display: "flex", alignItems: "center" }}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
         >
-          <h1 style={{ fontSize: "2rem", cursor: "pointer" }}>LiveCircle</h1>
+          {myWidth > threshold && (
+            <h1 style={{ fontSize: "2rem", cursor: "pointer" }}>Home</h1>
+          )}
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "13px" }}>
@@ -76,9 +88,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="rightPanel">
-          <img srcSet="/logo3.webp" alt="" />
-        </div>
+        {myWidth > threshold && (
+          <div className="rightPanel">
+            <img srcSet="/logo3.webp" alt="" />
+          </div>
+        )}
       </div>
     </>
   );

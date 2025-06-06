@@ -110,6 +110,7 @@
   .content .p2{
     font-size: 1.2rem;
   }
+  
 
 }
 /* @media (max-width: 440px) { */
@@ -202,6 +203,9 @@
   font-size: xx-large;
   font-weight: 500;
 }
+
+
+
 .innerLeft span{
   color: rgb(5, 92, 178);
 }
@@ -211,6 +215,8 @@
   margin-top: 2rem;
   border-radius: 1.5rem;
 }
+
+
 
 .lobbyContainer{
   display: flex; 
@@ -226,6 +232,23 @@
   align-items: center;
 }
 
-
+@media (max-width:720px){
+  .innerLeft p{
+    font-size: x-large;
+  }
+  .content{
+    flex-direction: column;
+    gap: 0;
+  }
+  .emptyText{
+    font-size: x-large;
+  }
+  .lobbyVideo{
+    width: 90vw;
+  }
+  .textF{
+    flex-direction: column;
+  }
+}
 
 
