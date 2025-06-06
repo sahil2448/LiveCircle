@@ -58,6 +58,42 @@ const Authentication = () => {
 
   return (
     <div className="mainContainer">
+      <div className="snacks">
+        {" "}
+        <Snackbar
+          open={open}
+          autoHideDuration={2000}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          onClose={() => setOpen(false)}
+          color="green"
+        >
+          <Alert
+            onClose={() => setOpen(false)}
+            severity="success"
+            variant="outlined"
+            sx={{ width: "100%" }}
+          >
+            {message}
+          </Alert>
+        </Snackbar>{" "}
+        <Snackbar
+          open={showError}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          autoHideDuration={6000}
+          onClose={() => setShowError(false)}
+          color="red"
+        >
+          <Alert
+            onClose={() => setShowError(false)}
+            severity="error"
+            variant="outlined"
+            sx={{ width: "100%" }}
+          >
+            {error}
+          </Alert>
+        </Snackbar>{" "}
+      </div>
+
       {myWidth > threshold && (
         <div>
           <div style={{}} className="header" onClick={() => routeTo("/")}>
@@ -140,36 +176,6 @@ const Authentication = () => {
           {formState === 0 ? "Log in" : "Register"}
         </Button>
       </div>
-      <Snackbar
-        open={open}
-        autoHideDuration={2000}
-        onClose={() => setOpen(false)}
-        color="green"
-      >
-        <Alert
-          onClose={() => setOpen(false)}
-          severity="success"
-          variant="outlined"
-          sx={{ width: "100%" }}
-        >
-          {message}
-        </Alert>
-      </Snackbar>{" "}
-      <Snackbar
-        open={showError}
-        autoHideDuration={2000}
-        onClose={() => setShowError(false)}
-        color="red"
-      >
-        <Alert
-          onClose={() => setShowError(false)}
-          severity="error"
-          variant="outlined"
-          sx={{ width: "100%" }}
-        >
-          {error}
-        </Alert>
-      </Snackbar>{" "}
     </div>
   );
 };

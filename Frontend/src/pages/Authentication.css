@@ -42,6 +42,8 @@
     cursor: pointer;
     font-size: 2rem;
 }
+
+
 @media (max-width:752px) {
     .header{
         color: black;
