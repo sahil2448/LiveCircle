@@ -32,10 +32,10 @@ const VideoMeet = () => {
   let localVideoRef = useRef(); // Reference to the local video element
 
   // Media state variables
-  let [videoAvailable, setVideoAvailable] = useState(true); // Whether camera is available
-  let [audioAvailable, setAudioAvailable] = useState(true); // Whether microphone is available
-  let [video, setVideo] = useState(); // Whether video is enabled
-  let [audio, setAudio] = useState(); // Whether audio is enabled
+  let [videoAvailable, setVideoAvailable] = useState(false); // Whether camera is available
+  let [audioAvailable, setAudioAvailable] = useState(false); // Whether microphone is available
+  let [video, setVideo] = useState(false); // Whether video is enabled
+  let [audio, setAudio] = useState(false); // Whether audio is enabled
   let [screen, setScreen] = useState(); // For screen sharing stream
   let [screenAvailable, setScreenAvailable] = useState(); // Whether screen sharing is available
 
@@ -268,8 +268,6 @@ const VideoMeet = () => {
       }
     }
   };
-
-  // NICHE KA COMMENTED CODE MERA HAI...connectToSocketServer wala code mera hai
 
   let connectToSocketServer = () => {
     socketRef.current = io.connect(server_url, { secure: false }); // After connecting with server...socket will give us an id
