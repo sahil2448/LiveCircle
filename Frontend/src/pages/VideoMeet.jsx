@@ -407,11 +407,12 @@ const VideoMeet = () => {
    * camera and microphone permissions and sets up the local stream.
    */
 
-  const names = [];
+  const [me, SetMe] = useState("");
   let connect = (username) => {
     setAskForUsername(false);
     getMedia();
-    names.push(username);
+    // names.push(username);
+    SetMe(username);
   };
 
   const handleVideo = () => {
@@ -580,7 +581,7 @@ const VideoMeet = () => {
             <Button
               variant="contained"
               style={{ height: "2.5rem" }}
-              onClick={connect}
+              onClick={() => connect(username)}
             >
               Connect
             </Button>
@@ -754,7 +755,7 @@ const VideoMeet = () => {
               }}
             >
               {" "}
-              {}
+              {`${me} (Host)`}
             </p>
           </div>
 
@@ -771,7 +772,7 @@ const VideoMeet = () => {
                   autoPlay
                   muted
                 />
-                <p>{names[idx]}</p>
+                {/* <p>{names[idx]}</p> */}
               </div>
             ))}
           </div>
