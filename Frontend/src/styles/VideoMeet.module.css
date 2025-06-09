@@ -45,6 +45,7 @@
     background-color: white;
     border-radius: 10px;
     padding-inline: 20px;
+    z-index: 10000;
 }
 
 .chatContainer{
