@@ -153,6 +153,7 @@ HOW IT WORKS:
 
 This approach efficiently searches all rooms in a single pass and stops
 effectively once the socket is found by not changing the result in later iterations.
+// just a comment
 */
 
     socket.on("disconnect", () => {
