@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import mobile from "../../public/mobile.webp";
+import HeroImage from "../../public/H1.png";
 import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -127,7 +127,7 @@ function LandingPage() {
           </div>
         </div>
         <div className="brdrs">
-          <img src={mobile} alt="" />
+          <img style={{ borderRadius: "1rem" }} src={HeroImage} alt="" />
         </div>
       </div>
     </div>

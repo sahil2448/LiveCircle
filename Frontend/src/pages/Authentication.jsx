@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import nature1 from "../../public/nature1.webp";
+import Auth2 from "../../public/Auth2.webp";
 import "./Authentication.css";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Button, Snackbar, TextField } from "@mui/material";
@@ -100,7 +100,7 @@ const Authentication = () => {
             <a>LiveCirle</a>
           </div>
           <div className="left">
-            <img className="leftImg" src={nature1} alt="" />
+            <img className="leftImg" src={Auth2} alt="" />
           </div>
         </div>
       )}

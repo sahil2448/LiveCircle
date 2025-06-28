@@ -1,6 +1,7 @@
 .landingPageContainer {
-  background: url("../public/background.webp") no-repeat center center;
+  /* background: url("../public/background.webp") no-repeat center center; */
   background-size: cover;
+  background-color: rgb(0, 0, 0);
   color: white;
   width: 100vw;
   min-height: 100vh;
