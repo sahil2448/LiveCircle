@@ -190,7 +190,7 @@ const History = () => {
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Meet successfullt deleted
+          Meet successfully deleted
         </Alert>
       </Snackbar>{" "}
     </div>
