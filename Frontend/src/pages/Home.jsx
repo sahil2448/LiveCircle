@@ -65,8 +65,8 @@ const Home = () => {
         <div className="leftPanel">
           <div className="innerLeft">
             <p>
-              Providing <span> Quality Video Call</span> Just Like <br />
-              Quality Education
+              Delivering <span> Premium Video Calls</span> with <br />
+              the Clarity You Deserve{" "}
             </p>
 
             <div

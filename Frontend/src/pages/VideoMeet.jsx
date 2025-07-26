@@ -589,7 +589,7 @@ const VideoMeet = () => {
       style={{
         position: "relative",
         height: "100vh",
-        backgroundColor: "#1a1a1a",
+        backgroundColor: "#00283fff",
       }}
     >
       {/* Chat Modal */}
@@ -599,7 +599,7 @@ const VideoMeet = () => {
             position: "fixed",
             top: 0,
             right: 0,
-            width: "300px",
+            width: "350px",
             height: "100vh",
             backgroundColor: "white",
             zIndex: 1000,
